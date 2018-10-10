@@ -36,9 +36,7 @@ namespace :delayed_job do
   task :stop do
     on roles(delayed_job_roles) do
       within release_path do
-        with rails_env: fetch(:rails_env) do
-          execute "RAILS_ENV=#{fetch(:rails_env)} ", :bundle, :exec, delayed_job_bin, delayed_job_args, :stop
-        end
+        execute "RAILS_ENV=#{fetch(:rails_env)} ", :bundle, :exec, delayed_job_bin, delayed_job_args, :stop
       end
     end
   end
@@ -47,9 +45,7 @@ namespace :delayed_job do
   task :start do
     on roles(delayed_job_roles) do
       within release_path do
-        with rails_env: fetch(:rails_env) do
-          execute "RAILS_ENV=#{fetch(:rails_env)} ", :bundle, :exec, delayed_job_bin, delayed_job_args, :start
-        end
+        execute "RAILS_ENV=#{fetch(:rails_env)} ", :bundle, :exec, delayed_job_bin, delayed_job_args, :start
       end
     end
   end
@@ -58,10 +54,8 @@ namespace :delayed_job do
   task :status do
     on roles(delayed_job_roles) do
       within release_path do
-        with rails_env: fetch(:rails_env) do
-          capture( "RAILS_ENV=#{fetch(:rails_env)} ", :bundle, :exec, delayed_job_bin, delayed_job_args, :status ).each_line do |line|
-            info line
-          end
+        capture( "RAILS_ENV=#{fetch(:rails_env)} ", :bundle, :exec, delayed_job_bin, delayed_job_args, :status ).each_line do |line|
+          info line
         end
       end
     end
@@ -71,9 +65,7 @@ namespace :delayed_job do
   task :restart do
     on roles(delayed_job_roles) do
       within release_path do
-        with rails_env: fetch(:rails_env) do
-          execute "RAILS_ENV=#{fetch(:rails_env)} ", :bundle, :exec, delayed_job_bin, delayed_job_args, :restart
-        end
+        execute "RAILS_ENV=#{fetch(:rails_env)} ", :bundle, :exec, delayed_job_bin, delayed_job_args, :restart
       end
     end
   end
